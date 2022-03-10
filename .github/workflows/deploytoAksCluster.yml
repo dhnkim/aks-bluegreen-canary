@@ -79,14 +79,19 @@ jobs:
     needs: approveapp
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set cluster context
-        uses: azure/aks-set-context@v1
         
       - uses: azure/k8s-set-context@v1
         with:
           kubeconfig: ${{ secrets.aks_greenblue_kubeConfig }}
         id: login   
+        
+      - uses: azure/k8s-create-secret@v1
+        with:
+          namespace: greenblue
+          container-registry-url: miniprojectacr.azurecr.io
+          container-registry-username: ${{ secrets.acr_miniprojectacr_username }}
+          container-registry-password: ${{ secrets.acr_miniprojectacr_password }}
+          secret-name: greenbluedockerauth
         
       - name: Promote App
         uses: azure/k8s-deploy@v1.3
