@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "greenblue-850c"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "greenblue-850c"
+  template:
+    metadata:
+      labels:
+        app: "greenblue-850c"
+    spec:
+      containers:
+        - name: "greenblue-850c"
+          image: "miniprojectacr.azurecr.io/greenblue"
+          ports:
+          - containerPort: 80
