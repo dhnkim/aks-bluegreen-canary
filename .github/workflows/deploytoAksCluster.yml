@@ -56,7 +56,9 @@ jobs:
         namespace: greenblue
         manifests: |
           ./kubernetes/service.yaml
-          ./kubernetes/blue-deploy.yaml
+          ./kubernetes/green-deploy.yaml
+#          ./kubernetes/blue-deploy.yaml
+          
         images: |
           miniprojectacr.azurecr.io/green-nginx:1
         imagepullsecrets: |
@@ -100,7 +102,8 @@ jobs:
           namespace: greenblue
           manifests: |
             ./kubernetes/service.yaml
-            ./kubernetes/green-deploy.yaml
+            ./kubernetes/blue-deploy.yaml
+      #      ./kubernetes/green-deploy.yaml
           images: |
             miniprojectacr.azurecr.io/green-nginx:1
           strategy: blue-green
@@ -116,7 +119,7 @@ jobs:
             ./kubernetes/service.yaml
             ./kubernetes/blue-deploy.yaml
           images: |
-            miniprojectacr.azurecr.io/green-nginx:1
+            miniprojectacr.azurecr.io/blue-nginx:1
           strategy: blue-green
           traffic-split-method: pod
           action: reject  #deploy is the default; we will later use this to promote/reject
